@@ -15,7 +15,6 @@ module Alert
     end
 
     def update_led
-      byebug
       if self.safe == true
         self.alert.led.led_state = false
       else
@@ -27,13 +26,12 @@ module Alert
     private
 
     def sync_all_leds
-      # ledState = self.alert.led.led_state
-      # byebug
-      ObjectSpace.each_object(self.alert.led.class) {|l| 
-        if l != self.alert.led
-          l.led_state = self.alert.led.led_state
-          l.save
-        end }
+      ObjectSpace.each_object(self.alert.class) do |a|
+        if self.alert != a
+          a.led.led_state = self.alert.led.led_state
+          a.led.save
+        end
+      end
     end
 
 
