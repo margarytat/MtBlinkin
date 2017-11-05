@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+<h1>
+  Alert
+</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="border: 1px solid black;">
+        Id
+      </th>
+      <th style="border: 1px solid black;">
+        Name
+      </th>
+      
+        <th colspan='1' style="border: 1px solid black;">
+          Led
+        </th>
+      
+        <th colspan='1' style="border: 1px solid black;">
+          Button
+        </th>
+      
+    </tr>
+    <tr>
+      <th>
+        &nbsp;
+      </th>
+      <th>
+        &nbsp;
+      </th>
+      
+        
+          <th>
+            led_state
+          </th>
+        
+      
+        
+          <th>
+            safe
+          </th>
+        
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr id='<%= @alert.apiotics_instance %>'>
+      <td>
+        <%= @alert.apiotics_instance %>
+      </td>
+      <td>
+        <%= @alert.name %>
+      </td>
+      
+        
+          <td class='alert-led-led_state'>
+            <%= @alert.led.led_state %>
+          </td>
+        
+      
+        
+          <td class='alert-button-safe'>
+            <%= @alert.button.safe %>
+          </td>
+        
+      
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_alert_path(@alert) %> |
+<%= link_to 'Back', alerts_path %>

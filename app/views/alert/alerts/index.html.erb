@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+<h1>
+  Alerts
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th style="border: 1px solid black;">
+        Id
+      </th>
+      <th style="border: 1px solid black;">
+        Name
+      </th>
+      
+        <th colspan='1' style="border: 1px solid black;">
+          Led
+        </th>
+      
+        <th colspan='1' style="border: 1px solid black;">
+          Button
+        </th>
+      
+      <th style="border: 1px solid black;">
+        &nbsp;
+      </th>
+    </tr>
+    <tr>
+      <th>
+        &nbsp;
+      </th>
+      <th>
+        &nbsp;
+      </th>
+      
+        
+          <th>
+            led_state
+          </th>
+        
+      
+        
+          <th>
+            safe
+          </th>
+        
+      
+      <th>
+        &nbsp;
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @alerts.each do |object| %>
+      <tr id='<%= object.apiotics_instance %>'>
+        <td>
+          <%= object.apiotics_instance %>
+        </td>
+        <td>
+          <%= object.name %>
+        </td>
+        
+          
+            <td class='alert-led-led_state'>
+              <%= object.led.led_state %>
+            </td>
+          
+        
+          
+            <td class='alert-button-safe'>
+              <%= object.button.safe %>
+            </td>
+          
+        
+        <td>
+          <%= link_to "Edit", edit_alert_path(object)%>
+          <%= link_to "Show", alert_path(object) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
