@@ -26,14 +26,14 @@ module Alert
     private
 
     def sync_all_leds
-      ObjectSpace.each_object(self.alert.class) do |a|
+      alerts = ::Alert::Alert.all
+      alerts.each do |a|
         if self.alert != a
           a.led.led_state = self.alert.led.led_state
           a.led.save
         end
       end
     end
-
 
     def extract
       Apiotics::Extract.send(self)
