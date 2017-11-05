@@ -8,7 +8,7 @@ module Alert
     after_commit :extract, unless: :skip_extract
     after_commit :channel_push
     before_save :update_led
-    # after_commit :sync_all_leds
+    after_commit :sync_all_leds
     
     def sync
       Apiotics.sync(self)
@@ -26,15 +26,15 @@ module Alert
     
     private
 
-    # def sync_all_leds
-    #   ledState = self.alert.led.led_state
-    #   byebug
-    #   ObjectSpace.each_object(Alert) {|a| 
-    #     if a != self.alert
-    #       a.led.led_state = self.alert.led.led_state
-    #       a.led.save
-    #     end }
-    # end
+    def sync_all_leds
+      # ledState = self.alert.led.led_state
+      # byebug
+      ObjectSpace.each_object(self.alert.led.class) {|l| 
+        if l != self.alert.led
+          l.led_state = self.alert.led.led_state
+          l.save
+        end }
+    end
 
 
     def extract
