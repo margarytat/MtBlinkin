@@ -5,25 +5,24 @@ module Alert
     has_many :button_safe_logs, dependent: :destroy
     belongs_to :alert
     attr_accessor :skip_extract
-    # before_save :update_led
-
     after_commit :extract, unless: :skip_extract
     after_commit :channel_push
+    before_save :update_led
     # after_commit :sync_all_leds
     
     def sync
       Apiotics.sync(self)
     end
 
-    # def update_led
-    #   # byebug
-    #   if self.safe == true
-    #     self.alert.led.led_state = false
-    #   else
-    #     self.alert.led.led_state = true
-    #   end
-    #   self.alert.led.save
-    # end
+    def update_led
+      byebug
+      if self.safe == true
+        self.alert.led.led_state = false
+      else
+        self.alert.led.led_state = true
+      end
+      self.alert.led.save
+    end
     
     private
 
